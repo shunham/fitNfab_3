@@ -1,0 +1,88 @@
+﻿@model login.Models.LoginId
+
+@{
+    ViewBag.Title = "Login";
+}
+<style>
+    body, html {
+        background: url("../../NewFolder1/login2.jpg");
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+  
+
+    .f {
+        color: white;
+    }
+</style>
+
+@if (ViewBag.msg!= null)
+{
+    <script type="text/javascript">
+        
+        window.onload = function ()
+        {
+            
+                document.getElementById("x").innerHTML ='@ViewBag.msg';
+        };
+    </script>
+}
+
+<br>
+<h2 class="f">Login</h2>
+<div style="margin-left:5cm; color:white;font-size:0.7cm">
+    <b> <span id="x"></span></b>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group f">
+
+            <label class="control-label col-md-2">User Name</label>
+            <div class="col-md-10">
+
+                <input type="text" class="form-control " name="username" placeholder="email id...">
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group f">
+
+            <label class="control-label col-md-2">Password</label>
+            <div class="col-md-10">
+
+                <input type="password" class="form-control " name="pass" placeholder="password here...">
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div style="display:flex;justify-content:space-around ; color:white">
+    <div style="font-size:large">
+        @Html.ActionLink("Client-SignUp ", "ClientRegistration", "Client") |
+        @Html.ActionLink("Owner-SignUp ", "OwnerRegistration", "Owner") |
+    </div>
+    <div style="font-size:large">
+        @Html.ActionLink("Forget password ", "ForgetPassword", "ForgetPassword")
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

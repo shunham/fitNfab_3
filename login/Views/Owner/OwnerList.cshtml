@@ -1,0 +1,107 @@
+﻿@model IEnumerable<login.Models.Owner>
+
+@{
+    ViewBag.Title = "OwnerList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Gym List</h2>
+
+<div class="row mt-3">
+    <div class=" "></div>
+
+
+
+    <div style="display:flex ; justify-content:space-between">
+        <form method="post" action="@Url.Action("OwnerList", "Owner")">
+            <div style="display:flex">
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="text" class="form-control " name="city" placeholder="Enter city name...">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+
+                        <button type="submit" class="btn btn-default">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form method="post" action="@Url.Action("OwnerList", "Owner")">
+            <div class="col-md-offset-2 col-md-10">
+
+                <button type="submit" class="btn btn-default">All</button>
+            </div>
+        </form>
+        <div>
+            <div class="col-md-offset-12">
+            </div>
+            <div class="col-md-offset-12 "  style="justify-content:flex-end">
+                <button class="b btn btn-info " style="border-radius:10%;height:40px;width:90px  "> @Html.ActionLink("Logout", "Logout", "Logout")</button>
+
+            </div>
+        </div>
+        </div>
+
+    
+
+
+</div>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            <b>Gym List</b>
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+
+
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+
+        <td>
+
+            @Html.ActionLink("Details", "OwnerDetails", new { id = item.Oid })
+
+        </td>
+        <td>
+            <button class=" btn bg-success"> @Html.ActionLink("Book Session", "BookSession", new { id = item.Oid }) </button>
+        </td>
+        <td>
+            <p>@ViewBag.BookedSession</p>
+        </td>
+    </tr>
+    }
+
+</table>
+<p>
+    <button class=" btn bg-success"> @Html.ActionLink("Back", "ClientView","Default") </button>
+
+
+</p>
+
